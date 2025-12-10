@@ -14,13 +14,10 @@ export default class TranslatePlugin extends Plugin {
 	static activeTranslationModal: string;
 	settings: TranslatePluginSettings;
 
-
 	async onload() {
 		await this.loadSettings();
 
 		this.addSettingTab(new TranslateSettingTab(this.app, this));
-
-
 
 		this.registerView(
 			TranslateViewType,
@@ -71,6 +68,7 @@ export default class TranslatePlugin extends Plugin {
 
 	}
 
+
 	async activateView() {
 		const { workspace } = this.app;
 
@@ -89,19 +87,6 @@ export default class TranslatePlugin extends Plugin {
 		workspace.revealLeaf(leaf);
 	}
 
-	async updateView() {
-
-		const { workspace } = this.app;
-
-		let leaf: WorkspaceLeaf | null = null;
-
-		const leaves = workspace.getLeavesOfType(TranslateViewType);
-
-		leaf = leaves[0];
-		leaf.view.containerEl
-		console.log(leaf)
-
-	}
 	async loadSettings() {
 		const currentSettings = Object.assign(defaultSettings, await this.loadData());
 		this.settings = new TranslatePluginSettings(currentSettings);

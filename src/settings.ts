@@ -1,18 +1,19 @@
 import TranslatePlugin from "./main";
 import { App, PluginSettingTab, Setting } from "obsidian";
 
+
 export interface ISettings {
 	activeAPI: string;
 	fromLanguage: string;
 	toLanguage: string;
 }
 
+
 export const defaultSettings: ISettings = {
 	activeAPI: 'Projectsegfau',
 	fromLanguage: 'auto',
 	toLanguage: 'en',
 }
-
 
 
 export class TranslateSettingTab extends PluginSettingTab {
@@ -48,7 +49,6 @@ export class TranslateSettingTab extends PluginSettingTab {
 					})
 			)
 
-
 		new Setting(containerEl)
 			.setName('Output Language')
 			.addText((text) =>
@@ -58,12 +58,9 @@ export class TranslateSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.toLanguage = value;
 						this.plugin.saveSettings();
-						console.log(this.plugin.settings.toLanguage)
 					})
 			)
 
-
-		new Setting(containerEl).setName('API Selection').setHeading();
 
 		new Setting(containerEl)
 			.setName('Translation Model Selection')
@@ -75,18 +72,10 @@ export class TranslateSettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.activeAPI)
 					.onChange(async (value) => {
 						this.plugin.settings.activeAPI = value;
-						console.log(this.plugin.settings)
 						this.plugin.saveData(this.plugin.settings)
 						await this.plugin.saveSettings();
 					})
 			)
-
-
-
-
-
-
-
 
 	}
 }

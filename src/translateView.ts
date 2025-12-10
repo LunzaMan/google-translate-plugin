@@ -27,14 +27,10 @@ export class TranslateView extends ItemView {
 	}
 
 	async onOpen() {
-
-
 		const container = this.containerEl
 		container.empty();
 		const innerContainer = this.containerEl.createDiv({ cls: 'container' });
-
 		innerContainer.createEl('h1', { text: 'Translate Plugin' })
-
 
 		const inputLabel = innerContainer.createEl('label', { text: 'Input', cls: 'label' });
 		const inputLanguageSelector = inputLabel.createEl('input', { cls: 'languageInput', placeholder: 'Input Language' })
@@ -47,14 +43,13 @@ export class TranslateView extends ItemView {
 		const outputLanguageSelector = outputLabel.createEl('input', { cls: 'languageInput', placeholder: 'Output Language' })
 		const output = innerContainer.createEl('input', { cls: 'box', attr: { disabled: true }, placeholder: 'Translated text will be displayed here.' });
 
+		const copyButton = innerContainer.createEl('button', { text: 'Copy', cls: 'button' });
+
 		translateButton.onClickEvent(
 			async () => {
 
-				console.log(input.value)
 				if (input.value != null || input.value != "") {
 					const translatorObject = new translators();
-					console.log('this is the value of the output language input: ' + outputLanguageSelector.value)
-					console.log('this is the current settings of output landguage: ' + this.settings.toLanguage)
 					await translatorObject.translatorReturnFunction(
 						input.value,
 						outputLanguageSelector.value != '' ? outputLanguageSelector.value : this.settings.toLanguage,
@@ -63,8 +58,6 @@ export class TranslateView extends ItemView {
 					);
 					output.value = translatorObject.outputText ? translatorObject.outputText : "this is null";
 				}
-
-
 			});
 
 		swapButton.onClickEvent(() => {
@@ -75,7 +68,6 @@ export class TranslateView extends ItemView {
 		}
 		)
 
-		const copyButton = innerContainer.createEl('button', { text: 'Copy', cls: 'button' });
 
 		copyButton.onClickEvent(() => {
 			navigator.clipboard.writeText(output.value)

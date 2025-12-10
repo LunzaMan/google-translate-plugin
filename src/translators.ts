@@ -9,9 +9,6 @@ export default class translators {
 	outputText: string;
 
 	async translatorReturnFunction(inputWord: string, toLang: string, fromLang: string, activeAPI: string,) {
-		// console.log(toLang)
-		console.log('This is the output Lnaguage sent to translator: ' + toLang)
-		// console.log(fromLang)
 		const args: APIArguments = {
 			inputWord: inputWord,
 			fromLanguage: fromLang,
@@ -20,15 +17,12 @@ export default class translators {
 		switch (activeAPI) {
 			case "My Memory":
 				await this.myMemoryAPICall(args);
-				console.log(activeAPI)
 				break;
 			case "Lingva":
 				await this.lingaAPICall(args);
-				console.log(activeAPI)
 				break;
 			case "Projectsegfau":
 				await this.projectsegfauAPICall(args);
-				console.log(activeAPI)
 				break;
 
 		}
@@ -46,9 +40,7 @@ export default class translators {
 
 				const translatedText = json.responseData.translatedText;
 				this.outputText = translatedText;
-				console.log(translatedText);
 				// const baseURL = "https://translate.projectsegfau.lt/"
-				console.log(this.outputText)
 			} else {
 				this.outputText = "403"
 			}
@@ -73,7 +65,6 @@ export default class translators {
 
 		if (response.status == 200) {
 			const json = await response.json();
-			console.log(json.translation)
 			this.outputText = json.translation;
 		} else {
 			console.log("error occured");
