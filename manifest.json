@@ -1,6 +1,6 @@
 {
-	"id": "translate-obsidian-plugin",
-	"name": "Translate Plugin",
+	"id": "translate",
+	"name": "Translate",
 	"version": "1.0.0",
 	"minAppVersion": "1.10.6",
 	"description": "Translate texts directly from editor or sidebar.",
