@@ -76,7 +76,6 @@ export class TranslateSettingTab extends PluginSettingTab {
 			)
 
 
-		new Setting(containerEl).setName('Larva Settings').setHeading();
 
 
 

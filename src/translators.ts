@@ -9,6 +9,9 @@ export default class translators {
 	outputText: string;
 
 	async translatorReturnFunction(inputWord: string, toLang: string, fromLang: string, activeAPI: string,) {
+		// console.log(toLang)
+		console.log('This is the output Lnaguage sent to translator: ' + toLang)
+		// console.log(fromLang)
 		const args: APIArguments = {
 			inputWord: inputWord,
 			fromLanguage: fromLang,
@@ -44,6 +47,7 @@ export default class translators {
 				const translatedText = json.responseData.translatedText;
 				this.outputText = translatedText;
 				console.log(translatedText);
+				// const baseURL = "https://translate.projectsegfau.lt/"
 				console.log(this.outputText)
 			} else {
 				this.outputText = "403"

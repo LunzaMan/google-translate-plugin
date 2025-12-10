@@ -7,7 +7,7 @@ import {
 } from "obsidian";
 import { App, Modal } from "obsidian";
 import { TranslateViewType, TranslateView } from "src/translateView";
-import translators, { APIArguments } from "src/translators";
+import translators from "src/translators";
 import { TranslatePluginSettings, TranslateSettingTab, defaultSettings } from "./settings";
 
 export default class TranslatePlugin extends Plugin {
@@ -21,12 +21,6 @@ export default class TranslatePlugin extends Plugin {
 		this.addSettingTab(new TranslateSettingTab(this.app, this));
 
 
-		const translationArgs: APIArguments = {
-			inputWord: ' ',
-			toLanguage: this.settings.toLanguage,
-			fromLanguage: this.settings.fromLanguage
-
-		}
 
 		this.registerView(
 			TranslateViewType,
@@ -34,8 +28,6 @@ export default class TranslatePlugin extends Plugin {
 		);
 
 		this.addRibbonIcon('dice', 'Translate Plugin', (_evt: MouseEvent) => {
-			new Notice("is this working");
-			// new Notice("This is the notice");
 			this.activateView();
 		});
 
@@ -46,7 +38,6 @@ export default class TranslatePlugin extends Plugin {
 			editorCallback: async (editor: Editor) => {
 				const inputText = editor.getSelection();
 				const translatorObject = new translators;
-				translationArgs.inputWord = inputText;
 				await translatorObject.translatorReturnFunction(inputText, this.settings.toLanguage, this.settings.fromLanguage, this.settings.activeAPI);
 				new TranslatedModal(this.app, translatorObject.outputText).open();
 
@@ -59,7 +50,6 @@ export default class TranslatePlugin extends Plugin {
 			editorCallback: async (editor: Editor) => {
 				const inputText = editor.getSelection();
 				const translatorObject = new translators;
-				translationArgs.inputWord = inputText;
 				await translatorObject.translatorReturnFunction(inputText, this.settings.toLanguage, this.settings.fromLanguage, this.settings.activeAPI);
 				editor.replaceSelection(translatorObject.outputText);
 			}
@@ -71,7 +61,6 @@ export default class TranslatePlugin extends Plugin {
 			editorCallback: async (editor: Editor) => {
 				const inputText = editor.getSelection();
 				const translatorObject = new translators;
-				translationArgs.inputWord = inputText;
 				await translatorObject.translatorReturnFunction(inputText, this.settings.toLanguage, this.settings.fromLanguage, this.settings.activeAPI);
 				navigator.clipboard.writeText(translatorObject.outputText);
 				new Notice(translatorObject.outputText +
